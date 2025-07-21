@@ -44,19 +44,26 @@ const read = (req, res) => {
   req.profile.salt = undefined;
   return res.json(req.profile);
 };
+
 const update = async (req, res) => {
   try {
-    let user = req.profile;
-    user = extend(user, req.body);
-    user.updated = Date.now();
-    await user.save();
-    user.hashed_password = undefined;
-    user.salt = undefined;
-    res.json(user);
+    const user = await User.findOne({ email: req.params.email }); // or use findById if you're using ID
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Update fields — you can whitelist what’s allowed to update
+    if (req.body.name !== undefined) user.name = req.body.name;
+    if (req.body.password !== undefined) user.password = req.body.password;
+    if (req.body.role !== undefined) user.role = req.body.role;
+
+    await user.save(); // ✅ this only works if 'user' is a Mongoose document
+
+    res.json({ message: "User updated", user });
   } catch (err) {
-    return res.status(400).json({
-      error: errorHandler.getErrorMessage(err),
-    });
+    console.error("Update failed:", err);
+    res.status(400).json({ error: "Could not update user" });
   }
 };
 const remove = async (req, res) => {

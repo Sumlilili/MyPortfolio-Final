@@ -13,24 +13,29 @@ export const list = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const qualification = new Qualification(req.body);
-    await qualification.save();
-    res.status(201).json(qualification);
+    const edu = new Education(req.body);
+    const result = await edu.save();
+    res.status(201).json(result);
   } catch (err) {
-    handleError(res, err);
+    console.error("Education create error:", err); // 👈 log this
+    res.status(500).json({ error: "Server error", details: err.message });
   }
 };
+
 
 export const read = (req, res) => {
   res.json(req.qualification);
 };
 
 export const update = async (req, res) => {
+  if (req.auth.role !== 'admin') {
+    return res.status(403).json({ error: "Access denied" });
+  }
   try {
-    const updated = await Qualification.findByIdAndUpdate(req.qualification._id, req.body, { new: true });
+    const updated = await Education.findByIdAndUpdate(req.params.educationId, req.body, { new: true });
     res.json(updated);
   } catch (err) {
-    handleError(res, err);
+    res.status(400).json({ error: "Could not update education entry" });
   }
 };
 

@@ -13,6 +13,11 @@ const UserSchema = new mongoose.Schema({
     match: [/.+\@.+\..+/, 'Please fill a valid email address'],
     required: 'Email is required'
   },
+  role: {
+  type: String,
+  default: 'user',
+  enum: ['user', 'admin']
+  },
   created: {
     type: Date,
     default: Date.now

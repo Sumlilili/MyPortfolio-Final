@@ -1,17 +1,19 @@
 import express from 'express';
 import * as educationCtrl from '../controllers/education.controller.js';
+import authCtrl from '../controllers/auth.controller.js';
 
+const { requireSignin, isAdmin } = authCtrl;
 const router = express.Router();
 
 router.route('/')
   .get(educationCtrl.list)
-  .post(educationCtrl.create)
-  .delete(educationCtrl.removeAll);
+  .post(requireSignin, isAdmin, educationCtrl.create)
+  .delete(requireSignin, isAdmin, educationCtrl.removeAll);
 
 router.route('/:qualificationId')
   .get(educationCtrl.read)
-  .put(educationCtrl.update)
-  .delete(educationCtrl.remove);
+  .put(requireSignin, isAdmin, educationCtrl.update)
+  .delete(requireSignin, isAdmin, educationCtrl.remove);
 
 router.param('qualificationId', educationCtrl.qualificationByID);
 
