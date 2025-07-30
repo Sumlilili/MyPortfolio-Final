@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Card Duel</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="card-container">
+        <h2>Player Card</h2>
+        <img
+          id="playerCardImg"
+          src="https://www.deckofcardsapi.com/static/img/back.png"
+          alt="Player Card"
+          class="card"
+        />
+      </div>
+      <div class="card-container">
+        <h2>Computer Card</h2>
+        <img
+          id="computerCardImg"
+          src="https://www.deckofcardsapi.com/static/img/back.png"
+          alt="Computer Card"
+          class="card"
+        />
+      </div>
+      <button id="drawCard">Draw Card</button>
+      <div class="score-board">
+        <div>Player Score: <span id="playerScore">0</span></div>
+        <div>Computer Score: <span id="computerScore">0</span></div>
+      </div>
+      <div id="winnerMessage"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
