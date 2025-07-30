@@ -8,15 +8,20 @@
   "devDependencies": {
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
     "babel-loader": "^10.0.0",
     "concurrently": "^9.1.2",
+    "cypress": "^14.5.3",
     "nodemon": "^3.1.10"
   },
   "scripts": {
     "dev": "concurrently 'vite' \"nodemon server.js\"",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
