@@ -15,7 +15,7 @@ export default function Profile() {
     const newRole = isAdmin ? "user" : "admin";
 
     try {
-      const res = await fetch(`http://localhost:3000/api/users/byemail/${user.email}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/byemail/${user.email}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

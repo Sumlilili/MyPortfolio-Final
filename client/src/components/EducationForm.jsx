@@ -8,7 +8,7 @@ export default function EducationPage() {
   const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/education")
+    fetch(`${import.meta.env.VITE_API_URL}/api/education`)
       .then(res => res.json())
       .then(data => setEducations(data))
       .catch(err => console.error("Fetch error:", err));
@@ -22,8 +22,8 @@ export default function EducationPage() {
     e.preventDefault();
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `http://localhost:3000/api/education/${editingId}`
-      : "http://localhost:3000/api/education";
+      ? `${import.meta.env.VITE_API_URL}/api/education/${editingId}`
+      : `${import.meta.env.VITE_API_URL}/api/education`;
 
     try {
       const res = await fetch(url, {
@@ -57,7 +57,7 @@ export default function EducationPage() {
     if (!window.confirm("Delete this entry?")) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/education/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/education/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

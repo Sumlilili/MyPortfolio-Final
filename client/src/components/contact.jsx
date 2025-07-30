@@ -16,7 +16,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/contacts", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -37,7 +37,7 @@ export default function Contact() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/contacts", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contacts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -56,7 +56,7 @@ export default function Contact() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
     try {
-      const res = await fetch(`http://localhost:3000/api/contacts/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contacts/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });
