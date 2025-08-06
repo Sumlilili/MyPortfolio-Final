@@ -10,6 +10,9 @@ export default function About() {
             I loves React, Node, and clean database design. In my spare time I enjoy
             playing dodgeball, running, watching movies, and exploring the nature.
           </p>
+          <p>
+            CI/CD testing
+          </p>
         </div>
       </section>
     </section>
